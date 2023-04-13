@@ -66,11 +66,18 @@
         div.classList.add("playing");
       });
 
+      function removeTransition(e) {
+        // Now if you use the arrow function here this will not work
+        // We have multiple properties who havve transition set upon
+        // So we want to use the transform property of css which has the transition
+        if (e.propertyName !== "transform") return;
+        this.classList.remove("playing");
+        console.log(this);
+      }
+
       const keys = document.querySelectorAll(".key");
       keys.forEach((key) => {
-        key.addEventListener("transitionend", () => {
-          key.classList.remove("playing");
-        });
+        key.addEventListener("transitionend", removeTransition);
       });
     </script>
   </body>
